@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects</title>
+    <title>Portfolio</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <header>
-        <h1>Projects</h1>
+        <h1>Ali Hassan's Portfolio</h1>
     </header>
     <nav>
         <a href="{{ url_for('first_function') }}">Home</a>
@@ -18,20 +18,28 @@
     </nav>
     <div class="container">
         <section class="main">
+            {% for project in projects %}
             <div class="project">
-                <h3>Project 1</h3>
-                <p>Description of Project 1</p>
+                <h3>{{ project.project_name }}</h3>
+                <p>{{ project.project_description }}</p>
             </div>
-            <div class="project">
-                <h3>Project 2</h3>
-                <p>Description of Project 2</p>
-            </div>
-            <div class="project">
-                <h3>Project 3</h3>
-                <p>Description of Project 3</p>
-            </div>
+            {% endfor %}
+        </section>
+        
+        <section class="add-project">
+            <h2>Add New Project</h2>
+            <form action="{{ url_for('projects') }}" method="POST">
+                <label for="project_name">Project Name:</label><br>
+                <input type="text" id="project_name" name="project_name" required><br><br>
+                
+                <label for="project_description">Project Description:</label><br>
+                <textarea id="project_description" name="project_description" rows="4" required></textarea><br><br>
+                
+                <input type="submit" value="Add Project">
+            </form>
         </section>
     </div>
+    
     <footer>
         <p>&copy; 2024 Ali Hassan - Portfolio</p>
     </footer>
