@@ -24,7 +24,10 @@ class Project(db.Model):
 
 @app.route("/",methods = ["POST","GET"])
 def first_function():
-    return render_template('home.html')
+    project_list = Project.query.all()
+    print(project_list)
+
+    return render_template('home.html',project_list=project_list)
 
 @app.route("/about")
 def about_me():
@@ -39,15 +42,14 @@ def projects():
     if request.method == 'POST':
         project_name = request.form['project_name']
         project_description = request.form['project_description']
-
         new_project = Project(project_name=project_name, project_description=project_description)
         db.session.add(new_project)
         db.session.commit()
-
-        # Redirect to the same route to refresh the page with updated projects
+            # Redirect to the same route to refresh the page with updated projects
         return redirect(url_for('projects'))
 
     projects = Project.query.all()
+    print(projects)
     return render_template('projects.html', projects=projects)
 
 
