@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>Projects</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,7 +40,7 @@
         .container {
             padding: 20px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
         }
 
         .main {
@@ -54,6 +54,21 @@
             margin-bottom: 20px;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .project:hover {
+            transform: scale(1.05);
+        }
+
+        .delete-button {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-top: 10px;
         }
 
         .add-project {
@@ -102,17 +117,10 @@
             width: 100%;
         }
     </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            console.log("JavaScript loaded!");
-            
-            // Add any interactive JavaScript here
-        });
-    </script>
 </head>
 <body>
     <header>
-        <h1>Ali Hassan's Portfolio</h1>
+        <h1>Projects</h1>
     </header>
     <nav>
         <a href="{{ url_for('first_function') }}">Home</a>
@@ -126,24 +134,23 @@
             <div class="project">
                 <h3>{{ project.project_name }}</h3>
                 <p>{{ project.project_description }}</p>
+                <form action="{{ url_for('delete_project', project_id=project.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="delete-button">Delete</button>
+                </form>
             </div>
             {% endfor %}
         </section>
-        
         <section class="add-project">
             <h2>Add New Project</h2>
             <form action="{{ url_for('projects') }}" method="POST">
-                <label for="project_name">Project Name:</label><br>
-                <input type="text" id="project_name" name="project_name" required><br><br>
-                
-                <label for="project_description">Project Description:</label><br>
-                <textarea id="project_description" name="project_description" rows="4" required></textarea><br><br>
-                
+                <label for="project_name">Project Name:</label>
+                <input type="text" id="project_name" name="project_name" required>
+                <label for="project_description">Project Description:</label>
+                <textarea id="project_description" name="project_description" rows="4" required></textarea>
                 <input type="submit" value="Add Project">
             </form>
         </section>
     </div>
-    
     <footer>
         <p>&copy; 2024 Ali Hassan - Portfolio</p>
     </footer>
