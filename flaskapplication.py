@@ -33,7 +33,7 @@ def first_function():
 def about_me():
     return render_template('about.html')
 
-
+# Project function
 @app.route("/projects", methods=['GET', 'POST'])
 def projects():
     if request.method == 'POST':
