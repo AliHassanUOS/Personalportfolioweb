@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .register-form {
+            background: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .register-form h2 {
+            margin-bottom: 20px;
+        }
+
+        .register-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .register-form input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+        .register-form button {
+            background: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .register-form button:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form class="register-form" method="POST">
+            <h2>Register</h2>
+            {{ form.hidden_tag() }}
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}<br>
+            {{ form.email.label }}<br>
+            {{ form.email(size=32) }}<br>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}<br>
+            {{ form.confirm_password.label }}<br>
+            {{ form.confirm_password(size=32) }}<br>
+            {{ form.submit() }}
+        </form>
+    </div>
+</body>
+</html>
