@@ -95,6 +95,10 @@
             <div class="project">
                 <h3>{{ project.project_name }}</h3>
                 <p>{{ project.project_description }}</p>
+
+                <form action="{{ url_for('delete_project', project_id=project.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="delete-button">Delete</button>
+                </form>
             </div>
             {% endfor %}
         </section>

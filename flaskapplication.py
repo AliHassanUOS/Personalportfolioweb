@@ -52,11 +52,29 @@ def projects():
 
 @app.route("/projects/delete/<int:project_id>", methods=['POST'])
 def delete_project(project_id):
+    print(project_id)
     project = Project.query.get_or_404(project_id)
     db.session.delete(project)
     db.session.commit()
     return redirect(url_for('projects'))
 
+
+@app.route('/projects/<int:id>/edit', methods=['GET', 'POST'])
+def edit_project(id):
+    project = Project.query.get_or_404(id)
+    if request.method == 'POST':
+        project_name = request.form['project_name']
+        project_description = request.form['project_description']
+        
+        if not project_name:
+            error = "Project name is required."
+            return render_template('edit_project.html', project=project, error=error)
+        
+        project.project_name = project_name
+        project.project_description = project_description
+        db.session.commit()
+        return redirect(url_for('projects'))
+    return render_template('edit_project.html', project=project)
 
 @app.route("/contact")
 def contact():
